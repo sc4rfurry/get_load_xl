@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="src/style.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="src/script.js"></script>
+  <title>load_xl - Configuration Parser</title>
+</head>
+<body>
+  <div class="content">
+    <i class="fas fa-flask fa-5x"></i>
+    <h1 id="title">load_xl</h1>
+    <p id="description">Configuration Parser</p>
+    <a href="#" class="github-link">
+      <i class="fab fa-github"></i> View on GitHub
+    </a>
+    <br><br>
+    <div class="contentx">
+        <h3 style="color: aqua;">Installation:</h3>
+        <pre>
+          <code style="font-weight: bolder;color: chartreuse;">=> pip install load_xl</code>
+        </pre>
+        <h3 style="color: aqua;">Usage:</h3>
+        <pre>
+          <code style="text-align: left; color: coral;">
+            import load_xl
+            import os
+    
+            # Test envi file parsing and loading into Environment Variables
+            try:
+                load_xl.load_envi_file('.envi')
+                print(os.environ['TEST'])
+                print(os.environ['TEST_ENV'])
+            except load_xl.EnviFileParsingError as e:
+                print("Error in parsing envi file: {e}")
+          </code>
+        </pre>
+      </div>
+  </div>
+</body>
+</html>
