@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +11,7 @@
   <script src="src/script.js"></script>
   <title>load_xl - Configuration Parser</title>
 </head>
+
 <body>
   <div class="content">
     <i class="fas fa-flask fa-5x"></i>
@@ -20,26 +22,39 @@
     </a>
     <br><br>
     <div class="contentx">
-        <h3 style="color: aqua;">Installation:</h3>
-        <pre>
+      <h3 style="color: aqua;">Installation:</h3>
+      <pre>
           <code style="font-weight: bolder;color: chartreuse;">=> pip install load_xl</code>
         </pre>
-        <h3 style="color: aqua;">Usage:</h3>
-        <pre>
+      <h3 style="color: aqua;">Usage:</h3>
+      <pre>
           <code style="text-align: left; color: coral;">
-            import load_xl
-            import os
-    
-            # Test envi file parsing and loading into Environment Variables
+            #!/usr/bin/env python3
+            # -*- coding: utf-8 -*-
+            from load_xl import load_config, FileParsingError
+
+            # Test .env file parsing and loading
             try:
-                load_xl.load_envi_file('.envi')
-                print(os.environ['TEST'])
-                print(os.environ['TEST_ENV'])
-            except load_xl.EnviFileParsingError as e:
-                print("Error in parsing envi file: {e}")
+                print("\n[+] Loading .env file...")
+                env_config = load_config(".env")
+                print(env_config.get("TEST"))
+                print(env_config.get("TEST_ENV"))
+            except FileParsingError as e:
+                print(f"Error in parsing .env file: {e}")
+
+            # ... (tests for other file formats)
+
+            # Test .xml file parsing and returning as dict
+            try:
+                print("\n[+] Loading .xml file...")
+                xml_config = load_config("test.xml")
+                print(xml_config)
+            except FileParsingError as e:
+                print(f"Error in parsing .xml file: {e}")
           </code>
         </pre>
-      </div>
+    </div>
   </div>
 </body>
+
 </html>
