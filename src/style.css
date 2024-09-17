@@ -1,18 +1,110 @@
+html,
 body {
-    background-color: #000;
-    color: #fff;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
     font-family: "Orbitron", sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.3s, color 0.3s;
+    overflow-x: hidden;
+}
+
+:root {
+    --background-color: #000;
+    --text-color: #e0e0e0;
+    --link-bg-color: #fff;
+    --link-text-color: #000;
+}
+
+[data-theme="light"] {
+    --background-color: #fff;
+    --text-color: #000;
+    --link-bg-color: #000;
+    --link-text-color: #fff;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    animation: gradient-animation-dark 15s ease infinite;
+    transition: background 0.3s;
+}
+
+[data-theme="light"] .background {
+    animation: gradient-animation-light 15s ease infinite;
+}
+
+@keyframes gradient-animation-dark {
+    0% {
+        background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    }
+
+    50% {
+        background: linear-gradient(135deg, #b21f1f, #fdbb2d, #1a2a6c);
+    }
+
+    100% {
+        background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+    }
+}
+
+@keyframes gradient-animation-light {
+    0% {
+        background: linear-gradient(135deg, #00c6ff, #0072ff);
+    }
+
+    50% {
+        background: linear-gradient(135deg, #0072ff, #00c6ff);
+    }
+
+    100% {
+        background: linear-gradient(135deg, #00c6ff, #0072ff);
+    }
+}
+
+.particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    transform: translate3d(0, 0, 0);
+    transition: transform 1s ease, background 0.3s;
+}
+
+[data-theme="light"] .particle {
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .content {
+    position: relative;
+    z-index: 1;
+    padding: 80px 20px 20px;
     text-align: center;
+    animation: fadeIn 1s ease-in-out;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    transition: background 0.3s, color 0.3s;
+    margin: 20px auto;
+    max-width: 800px;
+    width: 90%;
+    min-height: calc(100vh - 40px);
+    overflow-y: visible;
+    overflow-x: hidden;
 }
-.contentx {
-    text-align: left;
+
+[data-theme="light"] .content {
+    background: rgba(255, 255, 255, 0.9);
 }
 
 #title {
@@ -25,20 +117,58 @@ body {
     animation: description-animation 2s infinite;
 }
 
-
 .github-link {
     font-size: 24px;
     padding: 10px 20px;
-    background-color: #fff;
-    color: #000;
+    background-color: var(--link-bg-color);
+    color: var(--link-text-color);
     border-radius: 5px;
     animation: link-animation 2s infinite;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .github-link:hover {
-    background-color: #333;
-    color: #fff;
+    background-color: var(--link-text-color);
+    color: var(--link-bg-color);
     cursor: pointer;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+    color: var(--text-color);
+    transition: color 0.3s;
+    z-index: 1000;
+}
+
+h3 {
+    text-align: center;
+}
+
+pre {
+    text-align: left;
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 20px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-size: 16px;
+    line-height: 1.5;
+    max-width: 100%;
+}
+
+pre code {
+    display: block;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+[data-theme="light"] pre {
+    background: #f5f5f5;
+    color: #333;
 }
 
 @keyframes title-animation {
@@ -81,4 +211,56 @@ body {
     100% {
         transform: scale(1);
     }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Remove custom scrollbar styles for content */
+.content::-webkit-scrollbar {
+    display: none;
+}
+
+.content {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* Custom scrollbar for the entire page */
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #00c6ff, #0072ff);
+    border-radius: 6px;
+    box-shadow: inset 2px 2px 2px rgba(255, 255, 255, 0.25), inset -2px -2px 2px rgba(0, 0, 0, 0.25);
+    transform: var(--scrollbar-thumb-transform, translateZ(0) rotateY(0deg));
+    transition: background 0.3s, transform 0.3s;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #0072ff, #00c6ff);
+}
+
+/* Remove the previous body scrollbar hiding */
+body {
+    scrollbar-width: auto;
+    -ms-overflow-style: auto;
+}
+
+body::-webkit-scrollbar {
+    display: block;
 }

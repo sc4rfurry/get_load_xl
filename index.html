@@ -13,6 +13,10 @@
 </head>
 
 <body>
+  <div class="theme-toggle">
+    <i class="fas fa-moon"></i>
+  </div>
+  <div class="background"></div>
   <div class="content">
     <i class="fas fa-flask fa-5x"></i>
     <h1 id="title">load_xl</h1>
@@ -22,37 +26,37 @@
     </a>
     <br><br>
     <div class="contentx">
-      <h3 style="color: aqua;">Installation:</h3>
+      <h3>Installation:</h3>
       <pre>
-          <code style="font-weight: bolder;color: chartreuse;">=> pip install load_xl</code>
-        </pre>
-      <h3 style="color: aqua;">Usage:</h3>
+            <code>=> pip install load_xl</code>
+          </pre>
+      <h3>Usage:</h3>
       <pre>
-          <code style="text-align: left; color: coral;">
-            #!/usr/bin/env python3
-            # -*- coding: utf-8 -*-
-            from load_xl import load_config, FileParsingError
+            <code>
+              #!/usr/bin/env python3
+              # -*- coding: utf-8 -*-
+              from load_xl import load_config, FileParsingError
 
-            # Test .env file parsing and loading
-            try:
-                print("\n[+] Loading .env file...")
-                env_config = load_config(".env")
-                print(env_config.get("TEST"))
-                print(env_config.get("TEST_ENV"))
-            except FileParsingError as e:
-                print(f"Error in parsing .env file: {e}")
+              # Test .env file parsing and loading
+              try:
+                  print("\n[+] Loading .env file...")
+                  env_config = load_config(".env")
+                  print(env_config.get("TEST"))
+                  print(env_config.get("TEST_ENV"))
+              except FileParsingError as e:
+                  print(f"Error in parsing .env file: {e}")
 
-            # ... (tests for other file formats)
+              # ... (tests for other file formats)
 
-            # Test .xml file parsing and returning as dict
-            try:
-                print("\n[+] Loading .xml file...")
-                xml_config = load_config("test.xml")
-                print(xml_config)
-            except FileParsingError as e:
-                print(f"Error in parsing .xml file: {e}")
-          </code>
-        </pre>
+              # Test .xml file parsing and returning as dict
+              try:
+                  print("\n[+] Loading .xml file...")
+                  xml_config = load_config("test.xml")
+                  print(xml_config)
+              except FileParsingError as e:
+                  print(f"Error in parsing .xml file: {e}")
+            </code>
+          </pre>
     </div>
   </div>
 </body>
